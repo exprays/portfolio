@@ -4,7 +4,7 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type HomeDocumentDataSlicesSlice = never;
+type HomeDocumentDataSlicesSlice = HeroSectionSlice;
 
 /**
  * Content for home documents
@@ -67,6 +67,71 @@ export type HomeDocument<Lang extends string = string> =
 
 export type AllDocumentTypes = HomeDocument;
 
+/**
+ * Primary content in *HeroSection → Default → Primary*
+ */
+export interface HeroSectionSliceDefaultPrimary {
+  /**
+   * first_name field in *HeroSection → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_section.default.primary.first_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  first_name: prismic.KeyTextField;
+
+  /**
+   * last_name field in *HeroSection → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_section.default.primary.last_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  last_name: prismic.KeyTextField;
+
+  /**
+   * tag_line field in *HeroSection → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_section.default.primary.tag_line
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  tag_line: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for HeroSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeroSectionSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HeroSectionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *HeroSection*
+ */
+type HeroSectionSliceVariation = HeroSectionSliceDefault;
+
+/**
+ * HeroSection Shared Slice
+ *
+ * - **API ID**: `hero_section`
+ * - **Description**: HeroSection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeroSectionSlice = prismic.SharedSlice<
+  "hero_section",
+  HeroSectionSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -81,6 +146,10 @@ declare module "@prismicio/client" {
       HomeDocumentData,
       HomeDocumentDataSlicesSlice,
       AllDocumentTypes,
+      HeroSectionSlice,
+      HeroSectionSliceDefaultPrimary,
+      HeroSectionSliceVariation,
+      HeroSectionSliceDefault,
     };
   }
 }
