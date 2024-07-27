@@ -1,5 +1,6 @@
 "use client";
 
+import Bounded from "@/components/bounded";
 import { Content, KeyTextField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import gsap from "gsap";
@@ -63,7 +64,7 @@ const HeroSection = ({ slice }: HeroSectionProps): JSX.Element => {
   }
 
   return (
-    <section
+    <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       ref={component}
@@ -84,7 +85,7 @@ const HeroSection = ({ slice }: HeroSectionProps): JSX.Element => {
         </div>
 
       </div>
-    </section>
+    </Bounded>
   );
 };
 
