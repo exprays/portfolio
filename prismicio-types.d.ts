@@ -208,7 +208,7 @@ export type MenubarDocument<Lang extends string = string> =
     Lang
   >;
 
-type PageDocumentDataSlicesSlice = BiographySlice;
+type PageDocumentDataSlicesSlice = TechSectionSlice | BiographySlice;
 
 /**
  * Content for Page documents
@@ -421,6 +421,86 @@ export type HeroSectionSlice = prismic.SharedSlice<
   HeroSectionSliceVariation
 >;
 
+/**
+ * Item in *TechSection → Default → Primary → item*
+ */
+export interface TechSectionSliceDefaultPrimaryItemItem {
+  /**
+   * tech name field in *TechSection → Default → Primary → item*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tech_section.default.primary.item[].tech_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  tech_name: prismic.KeyTextField;
+
+  /**
+   * tech color field in *TechSection → Default → Primary → item*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tech_section.default.primary.item[].tech_color
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  tech_color: prismic.ColorField;
+}
+
+/**
+ * Primary content in *TechSection → Default → Primary*
+ */
+export interface TechSectionSliceDefaultPrimary {
+  /**
+   * Heading field in *TechSection → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tech_section.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * item field in *TechSection → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tech_section.default.primary.item[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  item: prismic.GroupField<Simplify<TechSectionSliceDefaultPrimaryItemItem>>;
+}
+
+/**
+ * Default variation for TechSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TechSectionSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TechSectionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TechSection*
+ */
+type TechSectionSliceVariation = TechSectionSliceDefault;
+
+/**
+ * TechSection Shared Slice
+ *
+ * - **API ID**: `tech_section`
+ * - **Description**: TechSection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TechSectionSlice = prismic.SharedSlice<
+  "tech_section",
+  TechSectionSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -449,6 +529,11 @@ declare module "@prismicio/client" {
       HeroSectionSliceDefaultPrimary,
       HeroSectionSliceVariation,
       HeroSectionSliceDefault,
+      TechSectionSlice,
+      TechSectionSliceDefaultPrimaryItemItem,
+      TechSectionSliceDefaultPrimary,
+      TechSectionSliceVariation,
+      TechSectionSliceDefault,
     };
   }
 }
