@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
+import { cn } from "@/lib/utils";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -17,9 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-zinc-900 text-zinc-100">
-      <body className={urbanist.className}>
+      <body className={cn(
+        "relative min-h-screen",
+        urbanist.className
+      )}>
         <Header />
         {children}
+        <Footer />
+        <div className="absolute pointer-events-none inset-0 z-40 h-full bg-[url('/noisetexture.jpg')] opacity-20 mix-blend-soft-light"></div>
       </body>
     </html>
   );
