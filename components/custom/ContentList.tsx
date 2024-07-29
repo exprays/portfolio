@@ -12,15 +12,15 @@ gsap.registerPlugin(ScrollTrigger);
 type ContentListProps = {
   items: Content.BlogPostDocument[] | Content.ProjectsDocument[];
   contentType: Content.ContentIndexSlice["primary"]["content_type"];
-  fallbackItemImage: Content.ContentIndexSlice["primary"]["fallback_image"];
-  viewMoreText: Content.ContentIndexSlice["primary"]["link_text"];
+  fallbackImage: Content.ContentIndexSlice["primary"]["fallback_image"];
+  linkText: Content.ContentIndexSlice["primary"]["link_text"];
 };
 
 export default function ContentList({
   items,
   contentType,
-  fallbackItemImage,
-  viewMoreText = "Read More",
+  fallbackImage,
+  linkText = "Read More",
 }: ContentListProps) {
   const component = useRef(null);
   const itemsRef = useRef<Array<HTMLLIElement | null>>([]);
@@ -114,7 +114,7 @@ export default function ContentList({
   const contentImages = items.map((item) => {
     const image = isFilled.image(item.data.image)
       ? item.data.image
-      : fallbackItemImage;
+      : fallbackImage;
     return asImageSrc(image, {
       fit: "crop",
       w: 220,
@@ -162,7 +162,7 @@ export default function ContentList({
                 </div>
               </div>
               <span className="ml-auto flex items-center gap-2 text-xl font-medium md:ml-0">
-                {viewMoreText} <MdArrowOutward />
+                {linkText} <MdArrowOutward />
               </span>
             </a>
           </li>
