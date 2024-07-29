@@ -791,6 +791,21 @@ export type TechSectionSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *TextBlock → Default → Primary*
+ */
+export interface TextBlockSliceDefaultPrimary {
+  /**
+   * content field in *TextBlock → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_block.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content: prismic.RichTextField;
+}
+
+/**
  * Default variation for TextBlock Slice
  *
  * - **API ID**: `default`
@@ -799,7 +814,7 @@ export type TechSectionSlice = prismic.SharedSlice<
  */
 export type TextBlockSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
+  Simplify<TextBlockSliceDefaultPrimary>,
   never
 >;
 
@@ -864,6 +879,7 @@ declare module "@prismicio/client" {
       TechSectionSliceVariation,
       TechSectionSliceDefault,
       TextBlockSlice,
+      TextBlockSliceDefaultPrimary,
       TextBlockSliceVariation,
       TextBlockSliceDefault,
     };
