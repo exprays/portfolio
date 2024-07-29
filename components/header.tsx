@@ -1,7 +1,6 @@
 import React from 'react';
 import { createClient } from "@/prismicio"
-import Link from 'next/link';
-import { PrismicNextLink } from '@prismicio/next';
+import NavBar from './navbar';
 
 export default async function Header() {
     const client = createClient();
@@ -9,22 +8,7 @@ export default async function Header() {
 
     return (
         <header className='top-0 z-50 mx-auto p-4 md:sticky md:top-4'>
-            <nav>
-                <ul>
-                    <li>
-                        <Link href={"/"} aria-label='Home Page'>
-                            {menubar.data.logo}
-                        </Link>
-                    </li>
-                    {menubar.data.navitem.map(({ label, link }, index) => (
-                        <li key={index}>
-                            <PrismicNextLink field={link}>
-                                {label}
-                            </PrismicNextLink>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
+            <NavBar settings={menubar} />
         </header>
     )
 }

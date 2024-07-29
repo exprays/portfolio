@@ -69,20 +69,20 @@ const TechSection = ({ slice }: TechSectionProps): JSX.Element => {
           {slice.primary.heading}
         </Heading>
       </Bounded>
-      <div className="tech-items-container">
+      <div className="tech-items-container overflow-hidden">
         {slice.primary.item.map((item, index) => (
           <div key={index} className="tech-item-row mb-8 flex items-center justify-center gap-4 text-zinc-700 tracking-tighter" aria-label={item.tech_name || undefined}>
             {Array.from({ length: 15 }, (_, i) => (
-              <>
-                <span key={i} className="tech-item text-7xl font-extrabold uppercase tracking-tighter" style={{
-                color: i === 7 && item.tech_color ? item.tech_color: "inherit"
+              <React.Fragment key={i}>
+                <span className="tech-item text-7xl font-extrabold uppercase tracking-tighter" style={{
+                  color: i === 7 && item.tech_color ? item.tech_color: "inherit"
                 }}>
                   {item.tech_name}
                 </span>
                 <span className="text-2xl">
                   <MdCircle />
                 </span>
-              </>
+              </React.Fragment>
             ))}
           </div>
         ))}
